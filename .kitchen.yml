@@ -12,5 +12,4 @@ platforms:
 suites:
   - name: all
     run_list:
-      - recipe[example::default]
-      - recipe[starter::default]
+      - recipe[task1_apache::default]
