@@ -1,0 +1,16 @@
+---
+driver:
+  name: docker
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: centos-7
+  - name: debian-9
+
+suites:
+  - name: all
+    run_list:
+      - recipe[example::default]
+      - recipe[starter::default]
