@@ -1,0 +1,76 @@
+-----> Starting Kitchen (v1.22.0)
+-----> Converging <all-centos-7>...
+       Preparing files for transfer
+       Preparing dna.json
+       Preparing cookbooks from project directory
+       Removing non-cookbook files before transfer
+       Preparing data_bags
+       Preparing environments
+       Preparing roles
+       Preparing validation.pem
+       Preparing client.rb
+-----> Chef Omnibus installation detected (install only if missing)
+       Transferring files to <all-centos-7>
+       Starting Chef Client, version 14.4.56
+       [2018-09-06T20:45:45+00:00] WARN: Plugin Network: unable to detect ipaddress
+       [2018-09-06T20:45:45+00:00] WARN: Plugin Network: unable to detect ipaddress
+       resolving cookbooks for run list: ["task1_apache::default", "task1_community::default", "task1_jboss::default"]
+       Synchronizing Cookbooks:
+         - task1_jboss (0.1.0)
+         - task1_apache (0.1.0)
+         - task1_community (0.1.0)
+         - nodejs (5.0.0)
+         - java (2.2.0)
+         - build-essential (8.2.1)
+         - ark (4.0.0)
+         - windows (5.1.1)
+         - homebrew (5.0.5)
+         - seven_zip (3.0.0)
+         - mingw (2.1.0)
+       Installing Cookbook Gems:
+       Compiling Cookbooks...
+       Converging 15 resources
+       Recipe: task1_apache::default
+         * yum_package[Install Apache] action install (up to date)
+       Recipe: nodejs::nodejs_from_binary
+         * yum_package[tar] action install (up to date)
+         * ark[nodejs-binary] action install
+           * directory[/usr/local/nodejs-binary-6.10.2] action create (up to date)
+           * remote_file[/tmp/kitchen/cache/nodejs-binary-6.10.2.tar.gz] action create (up to date)
+           * execute[unpack /tmp/kitchen/cache/nodejs-binary-6.10.2.tar.gz] action nothing (skipped due to action :nothing)
+           * execute[set owner on /usr/local/nodejs-binary-6.10.2] action nothing (skipped due to action :nothing)
+           * link[/usr/local/bin/node] action create (up to date)
+           * link[/usr/local/bin/npm] action create (up to date)
+           * link[/usr/local/nodejs-binary] action create (up to date)
+           * template[/etc/profile.d/nodejs-binary.sh] action create (skipped due to only_if)
+           * ruby_block[adding '/usr/local/nodejs-binary-6.10.2/bin' to chef-client ENV['PATH']] action run (skipped due to only_if)
+            (up to date)
+       Recipe: nodejs::repo
+         * yum_repository[node.js] action create
+           * template[/etc/yum.repos.d/node.js.repo] action create (up to date)
+           * execute[yum clean metadata node.js] action nothing (skipped due to action :nothing)
+           * execute[yum-makecache-node.js] action nothing (skipped due to action :nothing)
+           * ruby_block[package-cache-reload-node.js] action nothing (skipped due to action :nothing)
+            (up to date)
+       Recipe: nodejs::nodejs_from_package
+         * yum_package[nodejs] action install (up to date)
+         * yum_package[nodejs-devel] action install (up to date)
+       Recipe: java::notify
+         * log[jdk-version-changed] action nothing (skipped due to action :nothing)
+       Recipe: java::openjdk
+         * yum_package[java-1.8.0-openjdk, java-1.8.0-openjdk-devel] action install (up to date)
+         * java_alternatives[set-java-alternatives] action set (up to date)
+       Recipe: java::set_java_home
+         * directory[/etc/profile.d] action create (up to date)
+         * template[/etc/profile.d/jdk.sh] action create (up to date)
+       Recipe: task1_jboss::default
+         * remote_file[Downloading JBoss7] action create
+           - update content in file /opt/jboss-as-7.1.1.Final.tar.gz from e3b0c4 to 88fd3f
+           (file sizes exceed 10000000 bytes, diff output suppressed)
+         * bash[Untar JBoss7] action run
+           - execute "bash"  "/tmp/chef-script20180906-1590-1s1w1ry"
+         * remote_file[Downloading JBoss7 modules] action create
+           - update content in file /opt/jboss-as-7.1.1.Final/jboss-modules.jar from e15b98 to 82e884
+           (current file is binary, diff output suppressed)
+           - change owner from '501' to 'root'
+           - change group from '501' to 'root'
