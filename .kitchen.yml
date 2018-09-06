@@ -7,9 +7,9 @@ provisioner:
 
 platforms:
   - name: centos-7
-  - name: debian-9
 
 suites:
   - name: all
     run_list:
       - recipe[task1_apache::default]
+      - recipe[task1_community::default]
