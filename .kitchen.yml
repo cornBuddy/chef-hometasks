@@ -1,6 +1,6 @@
 ---
 driver:
-  name: docker
+  name: vagrant
 
 provisioner:
   name: chef_zero
@@ -12,3 +12,4 @@ suites:
   - name: all
     run_list:
       - role[web_server]
+      - recipe[task1_community]
