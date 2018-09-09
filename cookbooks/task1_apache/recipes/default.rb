@@ -1,8 +1,13 @@
 package 'Install Apache' do
-  case node[:platform]
-  when 'redhat', 'centos'
-    package_name 'httpd'
-  when 'ubuntu', 'debian'
-    package_name 'apache2'
-  end
+  package_name node.default['apache']['package_name']
+end
+
+service 'Enable Apache service' do
+  service_name node.default['apache']['package_name']
+  action :enable
+end
+
+service 'Start Apache service' do
+  service_name node.default['apache']['package_name']
+  action :start
 end

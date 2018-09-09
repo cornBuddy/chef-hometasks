@@ -11,6 +11,4 @@ platforms:
 suites:
   - name: all
     run_list:
-      - recipe[task1_apache::default]
-      - recipe[task1_community::default]
-      - recipe[task1_jboss::default]
+      - role[web_server]
