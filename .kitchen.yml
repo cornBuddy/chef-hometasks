@@ -1,6 +1,6 @@
 ---
 driver:
-  name: vagrant
+  name: docker
 
 provisioner:
   name: chef_zero
@@ -11,5 +11,4 @@ platforms:
 suites:
   - name: all
     run_list:
-      - role[web_server]
-      - recipe[task1_community]
+      - recipe[task1_jboss::install]
