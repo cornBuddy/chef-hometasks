@@ -9,7 +9,6 @@ describe 'task1_jboss::configure' do
     end
     let(:template) { chef_run.template('systemdify jboss') }
 
-
     it 'converges successfully' do
       expect { chef_run }.to_not raise_error
     end
