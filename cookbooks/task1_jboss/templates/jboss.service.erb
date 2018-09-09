@@ -1,0 +1,14 @@
+[Unit]
+Description=JBoss Service
+After=syslog.target network-online.target
+Before=httpd.service
+
+[Service]
+Type=oneshot
+ExecStart=<%= @entrypoint %>
+RemainAfterExit=yes
+Environment="JAVA_HOME=<%= @java_home %>"
+Environment="JBOSS_HOME=<%= @jboss_home %>"
+
+[Install]
+WantedBy=multi-user.target
