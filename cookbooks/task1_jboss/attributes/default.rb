@@ -1,6 +1,6 @@
 default['java']['install_flavor'] = 'openjdk'
-default['java']['jdk_version'] = '8'
-default['java']['java_home'] = '/usr/lib/jvm/java-1.8.0'
+default['java']['jdk_version'] = '6'
+default['java']['java_home'] = '/usr/lib/jvm/java-1.6.0'
 
 default['jboss']['core']['source'] = 'http://download.jboss.org/jbossas/7.1/jboss-as-7.1.1.Final/jboss-as-7.1.1.Final.tar.gz'
 default['jboss']['core']['tarball_dest'] = '/opt/jboss-as-7.1.1.Final.tar.gz'

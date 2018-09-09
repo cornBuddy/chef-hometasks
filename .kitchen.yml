@@ -11,4 +11,4 @@ platforms:
 suites:
   - name: all
     run_list:
-      - recipe[task1_jboss::configure]
+      - role[app_server]

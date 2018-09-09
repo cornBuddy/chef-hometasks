@@ -1,14 +1,15 @@
 [Unit]
 Description=JBoss Service
-After=syslog.target network-online.target
-Before=httpd.service
+After=network.target
 
 [Service]
-Type=oneshot
+Type=idle
 ExecStart=<%= @entrypoint %>
 RemainAfterExit=yes
 Environment="JAVA_HOME=<%= @java_home %>"
 Environment="JBOSS_HOME=<%= @jboss_home %>"
+TimeoutStartSec=600
+TimeoutStopSec=600
 
 [Install]
 WantedBy=multi-user.target

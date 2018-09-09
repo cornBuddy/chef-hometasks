@@ -22,7 +22,7 @@ describe 'task1_jboss::install' do
     end
 
     it 'downloads jboss modules' do
-      tarball = chef_run.node['jboss']['modules']['tarball_dest']
+      tarball = chef_run.node['jboss']['modules']['dest']
       expect(chef_run).to create_remote_file tarball
     end
   end
