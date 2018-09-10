@@ -7,13 +7,15 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "web" do |web|
     web.vm.network "private_network", ip: "192.168.1.2"
-  end
-
-  config.vm.define "app" do |app|
-    app.vm.network "private_network", ip: "192.168.1.3"
+    web.vm.network "forwarded_port", guest: 80, host: 8080
+    web.vm.hostname = "web"
+    web.vm.provision "shell", inline: <<-SHELL
+       sed -i '$ a 192.168.1.3 jboss' /etc/hosts
+    SHELL
   end
 
   config.vm.define "jboss" do |jboss|
-    jboss.vm.network "private_network", ip: "192.168.1.4"
+    jboss.vm.network "private_network", ip: "192.168.1.3"
+    jboss.vm.hostname = "jboss"
   end
 end
