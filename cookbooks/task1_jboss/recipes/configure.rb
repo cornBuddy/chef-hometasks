@@ -1,12 +1,12 @@
 template 'systemdify jboss' do
-  path node.default['jboss']['service']
+  path node['jboss']['service']
   source 'jboss.service.erb'
   owner 'root'
   group 'root'
   mode '0644'
-  variables java_home: node.default['java']['java_home'],
-            jboss_home: node.default['jboss']['core']['dest'],
-            entrypoint: node.default['jboss']['entrypoint']
+  variables java_home: node['java']['java_home'],
+            jboss_home: node['jboss']['core']['dest'],
+            entrypoint: node['jboss']['entrypoint']
   action :create_if_missing
   notifies :run, 'execute[daemon-reload]', :immediately
 end
