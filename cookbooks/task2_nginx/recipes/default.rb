@@ -18,6 +18,8 @@ template 'Configure Nginx' do
   owner 'root'
   group 'root'
   mode '0644'
+  variables port: node['jboss']['port'],
+            ip: node['jboss']['ip']
   action :create_if_missing
   notifies :run, 'reload nginx', :immediately
 end
