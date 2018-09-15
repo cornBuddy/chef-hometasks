@@ -12,8 +12,14 @@ end
 
 jboss_ip = resolve_hostname_into_ip node['jboss']['hostname']
 
-package 'Install Nginx' do
+package 'Enable epel' do
+  package_name 'epel-release'
+  action :install
+end
+
+package 'Install nginx' do
   package_name 'nginx'
+  action :install
 end
 
 service 'Enable Nginx' do
@@ -27,7 +33,7 @@ service 'Start Nginx' do
 end
 
 template 'Configure Nginx' do
-  path '/etc/nginx/conf.d/jenkins.conf'
+  path '/etc/nginx/conf.d/jboss.conf'
   source 'jboss.conf.erb'
   owner 'root'
   group 'root'
