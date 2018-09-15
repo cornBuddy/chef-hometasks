@@ -7,14 +7,10 @@ def resolve_hostname_into_ip(hostname)
   ).first['ip'].keys
     .map(&:to_s)
     .select { |k| ipv4_regex.match k }.first
+    .to_s
 end
 
 jboss_ip = resolve_hostname_into_ip node['jboss']['hostname']
-
-log 'search result' do
-  message jboss_ip.to_s
-  level :warn
-end
 
 package 'Install Nginx' do
   package_name 'nginx'
