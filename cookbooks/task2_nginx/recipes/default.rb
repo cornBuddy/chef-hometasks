@@ -1,3 +1,21 @@
+def resolve_hostname_into_ip(hostname)
+  ipv4_regex = /^([0-9]{1,3}\.){3}[0-9]{1,3}?$/
+  search(
+    :node,
+    "fqdn:#{hostname}",
+    filter_result: { ip: %w[network interfaces] }
+  ).first['ip']['eth1']['addresses'].keys
+    .map(&:to_s)
+    .select { |k| ipv4_regex.match k }.first
+end
+
+jboss_ip = resolve_hostname_into_ip node['jboss']['hostname']
+
+log 'search result' do
+  message jboss_ip.to_s
+  level :warn
+end
+
 package 'Install Nginx' do
   package_name 'nginx'
 end
@@ -19,9 +37,9 @@ template 'Configure Nginx' do
   group 'root'
   mode '0644'
   variables port: node['jboss']['port'],
-            ip: node['jboss']['ip']
+            ip: jboss_ip
   action :create_if_missing
-  notifies :run, 'reload nginx', :immediately
+  notifies :run, 'service[reload nginx]', :immediately
 end
 
 service 'reload nginx' do
