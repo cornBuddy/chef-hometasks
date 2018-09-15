@@ -3,8 +3,8 @@ def resolve_hostname_into_ip(hostname)
   search(
     :node,
     "fqdn:#{hostname}",
-    filter_result: { ip: %w[network interfaces] }
-  ).first['ip']['eth1']['addresses'].keys
+    filter_result: { ip: %w[network interfaces eth1 addresses] }
+  ).first['ip'].keys
     .map(&:to_s)
     .select { |k| ipv4_regex.match k }.first
 end

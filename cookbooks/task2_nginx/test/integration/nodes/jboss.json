@@ -7,15 +7,6 @@
   "chef_environment": "production",
   "hostname": "jboss",
   "fqdn": "jboss",
-  "network": {
-    "interfaces": {
-      "eth1": {
-        "addresses": {
-          "192.168.1.3": {}
-        }
-      }
-    }
-  },
   "automatic": {
     "fqdn": "jboss",
     "network": {
