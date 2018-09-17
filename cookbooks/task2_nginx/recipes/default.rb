@@ -41,10 +41,8 @@ template 'Configure Nginx' do
   variables port: node['jboss']['port'],
             ip: jboss_ip
   action :create_if_missing
-  notifies :run, 'service[reload nginx]', :immediately
 end
 
 service 'reload nginx' do
-  service_name 'nginx'
-  action :reload
+  subscribes :reload, 'template[Configure Nginx]', :immediately
 end
