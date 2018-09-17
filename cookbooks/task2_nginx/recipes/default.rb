@@ -32,15 +32,24 @@ service 'Start Nginx' do
   action :start
 end
 
-template 'Configure Nginx' do
-  path '/etc/nginx/conf.d/jboss.conf'
+cookbook_file 'Set default nginx config' do
+  source 'nginx.conf'
+  path '/etc/nginx/nginx.conf'
+  owner 'root'
+  group 'root'
+  mode '0644'
+  action :create
+end
+
+template 'Configure jboss' do
+  path '/etc/nginx/default.d/jboss.conf'
   source 'jboss.conf.erb'
   owner 'root'
   group 'root'
   mode '0644'
   variables port: node['jboss']['port'],
             ip: jboss_ip
-  action :create_if_missing
+  action :create
 end
 
 service 'reload nginx' do
