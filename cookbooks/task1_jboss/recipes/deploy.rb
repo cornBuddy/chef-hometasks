@@ -1,4 +1,10 @@
-cookbook_file node.default['jboss']['artifact_path'] do
+directory 'Create deploy dir' do
+  path node['jboss']['deploy_dir']
+  action :create
+  recursive true
+end
+
+cookbook_file node['jboss']['artifact_path'] do
   source node['jboss']['artifact_name']
   owner 'root'
   group 'root'
