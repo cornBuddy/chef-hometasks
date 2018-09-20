@@ -42,7 +42,7 @@ cookbook_file 'Set default nginx config' do
 end
 
 template 'Configure jboss' do
-  path '/etc/nginx/default.d/jboss.conf'
+  path '/etc/nginx/conf.d/jboss.conf'
   source 'jboss.conf.erb'
   owner 'root'
   group 'root'
